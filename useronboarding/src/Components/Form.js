@@ -26,6 +26,13 @@ const MemberForm = ({ values, errors, touched, status }) => {
             type="text"
             name="email"
           /><br/>
+        <label></label>
+          <Field id="role" as="select" name="role" placeholder="Role" value={values.role}>
+            <option value="Please Make a Selection">Please Make a Selection</option>
+            <option value="Web Dev">Web Dev</option>
+            <option value="Software Engineer">Software Engineer</option>
+            <option value="Project Manager">Project Manager</option>
+          </Field><br/>
         <label htmlFor="password">Password: </label>
           <Field
             id="password"
@@ -39,7 +46,6 @@ const MemberForm = ({ values, errors, touched, status }) => {
             name="terms"
             checked={values.terms}
           />
-          <span className="checkmark"/>
           {touched.terms && errors.terms && (
             <p className="errors">
               {errors.terms}
@@ -51,6 +57,7 @@ const MemberForm = ({ values, errors, touched, status }) => {
         <div className="applications" key={member.id}>
           <h1>Name: {member.name}</h1>
           <h2>E-mail: {member.email}</h2>
+          <h2>Occupation: {member.role}</h2>
         </div>
         ))}
     </div>
@@ -59,10 +66,11 @@ const MemberForm = ({ values, errors, touched, status }) => {
 };
 
 const FormikMemberForm = withFormik({
-  mapPropsToValues({ name, email, password, terms }) {
+  mapPropsToValues({ name, email, password, terms, role }) {
     return {
       name: name || "",
       email: email || "",
+      role: role || "",
       password: password || "",
       terms: terms || false
     };
